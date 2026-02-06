@@ -1,9 +1,11 @@
 import { Router } from "express";
 import { authorize } from "../middleware/auth";
-import { getAppointment } from "../controller/appointmentController";
+import { bookAppointment, getAppointment } from "../controller/appointmentController";
 
 const router = Router();
 
-router.post("/me", authorize(["USER"]), getAppointment);
+router.post("/", authorize(["USER"]), bookAppointment);
+
+router.get("/me", getAppointment)
 
 export default router;

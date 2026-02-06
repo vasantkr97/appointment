@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createService, getServices, setServiceAvailability } from "../controller/serviceController";
+import { createService, getServices, getSlots, setServiceAvailability } from "../controller/serviceController";
 import { authorize } from "../middleware/auth";
 
 const router = Router();
@@ -10,4 +10,5 @@ router.post("/:serviceId/availability", authorize(["SERVICE_PROVIDER"]), setServ
 
 router.get("/", getServices);
 
+router.get("/:serviceId/slots?date=YYYY-MM-DD", getSlots)
 export default router;

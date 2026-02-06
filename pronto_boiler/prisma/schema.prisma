@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
@@ -27,59 +27,58 @@ enum status {
 }
 
 model User {
-  id           String   @id @default(uuid())
-  name         String
-  email        String   @unique
-  passwordHash String
-  role         Role
-  createdAt    DateTime @default(now())
+  id                String   @id @default(uuid())
+  name              String
+  email             String   @unique
+  passwordHash      String
+  role              Role
+  createdAt         DateTime @default(now())
 
-  Service     Service[]
-  appointment Appointment[]
+  Services          Service[]
+  appointments      Appointment[]
 }
 
 model Service {
-  id   String       @id @default(uuid())
-  name String
-  type serviceTypes
+  id                String       @id @default(uuid())
+  name              String
+  type              serviceTypes
 
-  providerId String
-  provider   User   @relation(fields: [providerId], references: [id])
+  providerId        String
+  provider          User   @relation(fields: [providerId], references: [id])
 
-  durationMinutes Int
+  durationMinutes   Int
 
-  createdAt DateTime @default(now())
+  createdAt         DateTime @default(now())
 
-  availability Availability[]
-  appointments Appointment[]
+  availabilities    Availability[]
+  appointments      Appointment[]
 }
 
 model Availability {
-  id String @id @default(uuid())
+  id                String            @id @default(uuid())
 
-  serviceId String
-  services  Service @relation(fields: [serviceId], references: [id])
+  serviceId         String
+  services          Service           @relation(fields: [serviceId], references: [id])
 
-  dayOfWeek Int
-  startTime String 
-  endTime   String 
+  dayOfWeek         Int
+  startTime         String 
+  endTime           String 
 }
 
 model Appointment {
-  id String @id @default(uuid())
+  id                String            @id @default(uuid())
 
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  userId            String
+  user              User              @relation(fields: [userId], references: [id])
 
-  serviceId String
-  service   Service @relation(fields: [serviceId], references: [id])
+  serviceId         String
+  service           Service           @relation(fields: [serviceId], references: [id])
 
-  date      String 
-  startTime String 
-  endTime   String 
+  date              String 
+  startTime         String 
+  endTime           String 
 
-  slotId String @unique
-
-  status    status
-  createdAt DateTime @default(now())
+  slotId            String            @unique
+  status            status             
+  createdAt         DateTime          @default(now())
 }
