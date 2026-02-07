@@ -158,4 +158,3 @@ export const getAppointment= async (req: AuthRequest, res: Response) => {
 
 
 
-export const 

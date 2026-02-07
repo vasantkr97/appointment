@@ -2,6 +2,7 @@ import express from "express";
 import authRoutes from "./routes/authRoutes";
 import serviceRoutes from "./routes/serviceRoutes";
 import appointmentRoutes from "./routes/appointmentRoutes";
+import dailyScheduleRoutes from "./routes/dailyScheduleRoutes"
 import { authenticate } from "./middleware/auth";
 
 const app = express();
@@ -14,6 +15,8 @@ app.use("/auth", authRoutes);
 app.use("/services", authenticate, serviceRoutes);
 
 app.use("/appointments", authenticate, appointmentRoutes);
+
+app.use("/providers", authenticate, dailyScheduleRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
